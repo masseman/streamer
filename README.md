@@ -1,4 +1,4 @@
 streamer
 ========
 
-Stream raw sound PCM from Windows over a TCP/IP connection to a Linux machine
+Stream raw PCM from a Windows recording device to a Linux machine over a TCP/IP socket.
