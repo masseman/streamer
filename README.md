@@ -1,7 +1,6 @@
 Stream raw PCM from a Windows recording device to a Linux machine over a TCP/IP socket.
 
-Windows side
-============
+### Windows side
 
 Compile Streamer using Visual C++ and install as a service by doing
 ```
@@ -14,8 +13,7 @@ Streamer.exe /N /D <name of device> /H <host> /P <port>
 
 In order to stream all sound being played, the device to listen to should ideally "Stereo Mix". However, since it is not always available on newer versions of Windows, it may be necessary to install [Virtual Audio Cable](http://software.muzychenko.net/eng/vac.htm) or similar.
 
-Linux side
-==========
+### Linux side
 
 Simply run `netcat` and pipe into `aplay`:
 ```
