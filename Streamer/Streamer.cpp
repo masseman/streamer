@@ -49,7 +49,8 @@ namespace
   {
     for (UINT i = 0; i < length; i++)
     {
-      if (data[i])
+      unsigned char ch = data[i];
+      if (0x02 < ch && ch < 0xFE)
         return false;
     }
     return true;
