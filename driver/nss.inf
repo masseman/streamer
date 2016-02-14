@@ -1,0 +1,92 @@
+[Version]
+Signature="$Windows NT$"
+Class=MEDIA
+Provider=Mats
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+CatalogFile=nss.cat
+DriverVer=09/05/2015,9.9.9.9
+; Copyright 2015 by Mats
+
+[SourceDisksNames]
+1232="Driver Disk","",1232
+
+[SourceDisksFiles]
+vadsimpl.sys=1232
+
+[Manufacturer]
+"Network Sound Streamer"=DS,NTAMD64,NTIA64
+
+[DS]
+"Network Sound Streamer"=NSS,*NSS
+
+[DS.NTAMD64]
+"Network Sound Streamer"=NSS,*NSS
+
+[DS.NTIA64]
+"Network Sound Streamer"=NSS,*NSS
+
+[DestinationDirs]
+NSS.CopyList=10,system32\drivers
+
+[NSS]
+AlsoInstall=ks.registration(ks.inf),wdmaudio.registration(wdmaudio.inf)
+CopyFiles=NSS.CopyList
+AddReg=NSS.AddReg
+
+[NSS.NT]
+Include=ks.inf,wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration
+CopyFiles=NSS.CopyList
+AddReg=NSS.AddReg
+
+[NSS.CopyList]
+vadsimpl.sys
+
+[NSS.Interfaces]
+AddInterface="{6994AD04-93EF-11D0-A3CC-00A0C9223196}",Wave,NSS.I.Wave
+AddInterface="{6994AD04-93EF-11D0-A3CC-00A0C9223196}",Topology,NSS.I.Topo
+AddInterface="{65E8773E-8F56-11D0-A3B9-00A0C9223196}",Wave,NSS.I.Wave
+
+[NSS.NT.Interfaces]
+AddInterface="{6994AD04-93EF-11D0-A3CC-00A0C9223196}",Wave,NSS.I.Wave
+AddInterface="{6994AD04-93EF-11D0-A3CC-00A0C9223196}",Topology,NSS.I.Topo
+AddInterface="{65E8773E-8F56-11D0-A3B9-00A0C9223196}",Wave,NSS.I.Wave
+
+[NSS.NT.Services]
+AddService=nss,0x00000002,NSS_Service_Inst
+
+[NSS_Service_Inst]
+DisplayName="Network Sound Streamer (WDM)"
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%10%\system32\drivers\vadsimpl.sys
+
+[NSS.AddReg]
+HKR,,AssociatedFilters,,"wdmaud"
+HKR,,Driver,,vadsimpl.sys
+
+HKR,Drivers,SubClasses,,"wave,mixer"
+
+HKR,Drivers\wave\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,"Network Sound Streamer"
+
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Description,,"Network Sound Streamer"
+
+HKLM,"SYSTEM\CurrentControlSet\Control\MediaCategories"\"{946A7B1A-EBBC-422a-A81F-F07C8D40D3B4}",Name,,"Network Sound Streamer"
+
+[NSS.I.Wave]
+AddReg=NSS.I.Wave.AddReg
+
+[NSS.I.Wave.AddReg]
+HKR,,CLSID,,"{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+HKR,,FriendlyName,,"Network Sounds Streamer Wave"
+
+[NSS.I.Topo]
+AddReg=NSS.I.Topo.AddReg
+
+[NSS.I.Topo.AddReg]
+HKR,,CLSID,,"{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+HKR,,FriendlyName,,"Network Sounds Streamer Topology"
+
